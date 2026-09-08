@@ -1,0 +1,20 @@
+# 依赖目录（体积大、可重新安装，绝不提交到 Git）
+node_modules
+
+# 构建产物（npm run build 生成，重新构建即可）
+dist
+dist-ssr
+
+# 日志与本地文件
+*.local
+*.log
+
+# 编辑器
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# 课程提交文档：只在本地保留，不随代码仓库上传
+docs/
+*.docx
