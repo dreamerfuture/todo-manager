@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人待办事项管理器（原生 JS 版）</title>
+  <!-- 样式单独放一个文件，方便阅读和维护 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ============ 顶部标题 ============ -->
+    <header class="app-header">
+      <h1>✅ 个人待办事项管理器</h1>
+      <span class="version">原生 JS 版</span>
+    </header>
+
+    <!-- ============ ① 新建任务 ============ -->
+    <section class="card">
+      <h2>＋ 新建任务</h2>
+      <div class="row">
+        <!-- id 用于 JS 里查找元素，placeholder 是输入框灰字提示 -->
+        <input id="titleInput" type="text" class="input grow" placeholder="要做什么？（必填）" />
+        <select id="priorityInput" class="input">
+          <option value="高">🔴 高优先级</option>
+          <option value="中" selected>🟠 中优先级</option>
+          <option value="低">🟢 低优先级</option>
+        </select>
+        <input id="dueInput" type="date" class="input" title="截止日期（可选）" />
+        <button id="addBtn" class="btn">添加</button>
+      </div>
+      <!-- 校验提示（成功绿色 / 失败红色，由 JS 控制文字和颜色） -->
+      <p id="tip" class="tip"></p>
+    </section>
+
+    <!-- ============ ② 统计信息 ============ -->
+    <section class="card">
+      <h2>📊 完成进度</h2>
+      <div class="stats-row">
+        <div class="stat"><b id="statTotal">0</b><span>全部任务</span></div>
+        <div class="stat"><b id="statDone" style="color:#16a34a">0</b><span>已完成</span></div>
+        <div class="stat"><b id="statActive" style="color:#f59e0b">0</b><span>进行中</span></div>
+        <div class="stat"><b id="statPercent" style="color:#8b5cf6">0%</b><span>完成率</span></div>
+      </div>
+      <div class="progress">
+        <!-- 进度条：JS 只改它的 width 百分比 -->
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </section>
+
+    <!-- ============ ③ 任务列表 ============ -->
+    <section class="card">
+      <div class="list-head">
+        <h2>📝 任务列表</h2>
+        <div class="tabs">
+          <!-- data-filter 记录这个按钮代表哪种筛选，JS 用它判断 -->
+          <button class="tab" data-filter="all">全部（<span id="countAll">0</span>）</button>
+          <button class="tab" data-filter="active">进行中（<span id="countActive">0</span>）</button>
+          <button class="tab" data-filter="done">已完成（<span id="countDone">0</span>）</button>
+        </div>
+        <button id="clearDoneBtn" class="link-btn">清空已完成</button>
+      </div>
+
+      <!-- 空状态提示；有任务时由 JS 隐藏 -->
+      <p id="empty" class="empty">这里空空如也，添加一个任务吧 ✨</p>
+
+      <!-- 任务列表：内容由 JS 的 renderList() 生成 -->
+      <ul id="list" class="todo-list"></ul>
+    </section>
+
+    <footer class="app-footer">数据保存在浏览器本地（localStorage），刷新不丢失</footer>
+  </div>
+
+  <!-- 脚本放在最后：确保上面的 HTML 已经存在，JS 才能查到元素 -->
+  <script src="app.js"></script>
+</body>
+</html>

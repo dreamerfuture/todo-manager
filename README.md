@@ -42,25 +42,43 @@ npm run preview
 
 Windows 用户也可以直接双击项目根目录下的 `启动开发服务器.bat` 启动开发服务器。
 
+## 两种实现
+
+本项目提供两套功能等价的实现，便于对比不同技术方案的取舍：
+
+| 实现 | 位置 | 技术 | 运行方式 |
+|---|---|---|---|
+| **原生实现** | `vanilla/` | HTML + CSS + 原生 JavaScript（无框架、无构建） | **双击 `vanilla/index.html`** 即可打开；也可直接把该文件夹部署到静态托管平台 |
+| **组件化实现** | 仓库根目录 | Vue 3 + Vite | `npm install` → `npm run dev` |
+
+两者功能一致（新增 / 编辑 / 删除 / 完成 / 筛选 / 统计 / 逾期提示 / 本地持久化），差别在于：
+
+- **原生实现**：自己维护一份数据数组，每次修改后手动调用 `render()` 重新渲染界面，用事件委托处理交互。代码集中在 `app.js`，依赖为零，双击即可运行。
+- **组件化实现**：由框架的响应式系统在数据变化时自动更新界面，页面拆分为多个可复用组件，适合功能持续增长的项目，但引入了框架的学习成本与构建步骤。
+
 ## 项目结构
 
 ```
 todo-manager/
-├── index.html                 # 页面入口
+├── index.html                 # Vue 版页面入口
 ├── vite.config.js             # Vite 配置
 ├── package.json               # 依赖与脚本
 ├── 启动开发服务器.bat          # Windows 一键启动脚本
-└── src/
-    ├── main.js                # 应用入口：创建并挂载应用
-    ├── style.css              # 全局样式
-    ├── App.vue                # 根组件：页面骨架
-    ├── store/
-    │   └── todos.js           # 数据层：状态、增删改查、本地持久化
-    └── components/
-        ├── TodoInput.vue      # 新增任务表单
-        ├── TodoStats.vue      # 统计信息与进度条
-        ├── TodoList.vue       # 任务列表与筛选
-        └── TodoItem.vue       # 单条任务（含行内编辑）
+├── src/                       # Vue 版源码（组件化实现）
+│   ├── main.js                # 应用入口：创建并挂载应用
+│   ├── style.css              # 全局样式
+│   ├── App.vue                # 根组件：页面骨架
+│   ├── store/
+│   │   └── todos.js           # 数据层：状态、增删改查、本地持久化
+│   └── components/
+│       ├── TodoInput.vue      # 新增任务表单
+│       ├── TodoStats.vue      # 统计信息与进度条
+│       ├── TodoList.vue       # 任务列表与筛选
+│       └── TodoItem.vue       # 单条任务（含行内编辑）
+└── vanilla/                   # 原生实现（无框架、无构建）
+    ├── index.html             # 页面结构
+    ├── style.css              # 样式
+    └── app.js                 # 全部逻辑：数据 → 渲染 → 事件
 ```
 
 ### 代码组织说明
