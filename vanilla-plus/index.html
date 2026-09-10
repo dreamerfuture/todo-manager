@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人待办事项管理器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>✅ 个人待办事项管理器</h1>
+      <span id="date" class="date"></span>
+    </header>
+
+    <!-- 新建任务 -->
+    <section class="card">
+      <h2>＋ 新建任务</h2>
+      <div class="row">
+        <input id="t" class="input grow" placeholder="要做什么？（必填）" />
+        <select id="p" class="input"><option>高</option><option selected>中</option><option>低</option></select>
+        <input id="d" class="input" type="date" />
+        <button class="btn" onclick="add()">添加</button>
+      </div>
+      <p id="tip" class="tip"></p>
+    </section>
+
+    <!-- 统计与进度 -->
+    <section class="card">
+      <h2>📊 完成进度</h2>
+      <div class="stats">
+        <div class="stat"><b id="sTotal">0</b><span>全部任务</span></div>
+        <div class="stat"><b id="sDone" class="green">0</b><span>已完成</span></div>
+        <div class="stat"><b id="sActive" class="orange">0</b><span>进行中</span></div>
+        <div class="stat"><b id="sPercent" class="purple">0%</b><span>完成率</span></div>
+      </div>
+      <div class="progress"><div id="bar" class="bar"></div></div>
+    </section>
+
+    <!-- 列表与筛选 -->
+    <section class="card">
+      <div class="list-head">
+        <h2>📝 任务列表</h2>
+        <div class="tabs">
+          <button class="tab" data-f="all">全部</button>
+          <button class="tab" data-f="active">进行中</button>
+          <button class="tab" data-f="done">已完成</button>
+        </div>
+        <button class="link-btn" onclick="clearDone()">清空已完成</button>
+      </div>
+      <ul id="list" class="todo-list"></ul>
+      <p id="empty" class="empty">暂无任务，添加一个吧 ✨</p>
+    </section>
+
+    <footer class="app-footer">数据保存在浏览器本地（localStorage），刷新不丢失</footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
