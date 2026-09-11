@@ -13,7 +13,6 @@
       <span id="date" class="date"></span>
     </header>
 
-    <!-- 新建任务 -->
     <section class="card">
       <h2>＋ 新建任务</h2>
       <div class="row">
@@ -25,7 +24,6 @@
       <p id="tip" class="tip"></p>
     </section>
 
-    <!-- 统计与进度 -->
     <section class="card">
       <h2>📊 完成进度</h2>
       <div class="stats">
@@ -37,7 +35,6 @@
       <div class="progress"><div id="bar" class="bar"></div></div>
     </section>
 
-    <!-- 列表与筛选 -->
     <section class="card">
       <div class="list-head">
         <h2>📝 任务列表</h2>
@@ -47,6 +44,15 @@
           <button class="tab" data-f="done">已完成</button>
         </div>
         <button class="link-btn" onclick="clearDone()">清空已完成</button>
+      </div>
+
+      <div class="toolbar">
+        <input id="kw" class="input grow" placeholder="🔍 搜索任务内容" oninput="setKeyword(this.value)" />
+        <select id="sort" class="input" onchange="setSort(this.value)">
+          <option value="default">默认排序</option>
+          <option value="priority">按优先级</option>
+          <option value="due">按截止日期</option>
+        </select>
       </div>
       <ul id="list" class="todo-list"></ul>
       <p id="empty" class="empty">暂无任务，添加一个吧 ✨</p>
